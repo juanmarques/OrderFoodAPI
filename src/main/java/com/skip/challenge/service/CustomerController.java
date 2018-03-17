@@ -27,5 +27,6 @@ public class CustomerController {
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	public @ResponseBody ResultModel insert(@RequestBody Customer customer) {
 		return this.CustomerRepository.insertCustomer(customer);
-	}
+	}	
+	
 }

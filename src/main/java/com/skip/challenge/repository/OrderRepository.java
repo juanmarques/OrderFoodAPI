@@ -1,6 +1,7 @@
 package com.skip.challenge.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -19,16 +20,16 @@ public class OrderRepository {
 
 		try {
 			jdbctemplate.update(
-					"INSERT INTO `abroad`.`Order`(`date`,`customerId`,`deliveryAddress`,`contact`,`storeId`)VALUES(?,?,?,?,?)",
+					"INSERT INTO `abroad`.`Order`(`date`,`customerId`,`deliveryAddress`,`contact`,`storeId`)VALUES(?,?,?,?,?);",
 					Order.getDate(), Order.getCustomerId(), Order.getDeliveryAddress(), Order.getContact(),
 					Order.getStoreId());
 
 			jdbctemplate.update(
-					"INSERT INTO `abroad`.`OrderItem`(`orderId`,`price`,`quantity`,`total`,`productId`)VALUES(?,?,?,?,?)",
+					"INSERT INTO `abroad`.`OrderItem`(`orderId`,`price`,`quantity`,`total`,`productId`)VALUES(?,?,?,?,?);",
 					orderitem.getOrderId(), orderitem.getPrice(), orderitem.getQuantity(), orderitem.getTotal());
 
 			jdbctemplate.update(
-					"INSERT INTO `abroad`.`product`(`storeid`,`name`,`description`,`price`)VALUES(?,?,?,?,)",
+					"INSERT INTO `abroad`.`product`(`storeid`,`name`,`description`,`price`)VALUES(?,?,?,?,);",
 					product.getStoreid(), product.getName(), product.getDescription(), product.getPrice());
 
 		} catch (Exception e) {
@@ -36,4 +37,11 @@ public class OrderRepository {
 		}
 		return new ResultModel(200, "Sucess");
 	}
+
+		
+	public Order findbyId(int id) {
+		return jdbctemplate.queryForObject("Select * from abroad.Order where id = ?",
+				new BeanPropertyRowMapper<Order>(Order.class), id);
+	}
+
 }
