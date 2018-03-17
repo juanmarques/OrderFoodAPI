@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: Skip-Challenge
+Implementation-Version: 0.0.1
+Built-By: Gil
+Implementation-Vendor-Id: Skip-Challenge
+Build-Jdk: 1.8.0_161
+Implementation-URL: http://projects.spring.io/spring-boot/Skip-Challen
+ ge/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
