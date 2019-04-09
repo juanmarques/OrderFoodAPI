@@ -3,7 +3,6 @@ package br.com.food.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +19,11 @@ import br.com.food.repository.ProductRepository;
 @RequestMapping(value = "product")
 public class ProductController {
 
-	@Autowired
 	private ProductRepository productRepository;
 
+	public ProductController(ProductRepository repository) {
+		this.productRepository = repository;
+	}
 
 	@RequestMapping(value = "/id/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

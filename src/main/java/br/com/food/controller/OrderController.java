@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import br.com.food.entity.CliOrder;
-import br.com.food.entity.CustomClientOrderSerializer;
 import br.com.food.entity.Customer;
 import br.com.food.entity.OrderItem;
 import br.com.food.entity.Product;
@@ -29,20 +27,27 @@ import br.com.food.repository.ClientOrderRepository;
 import br.com.food.repository.CustomerRepository;
 import br.com.food.repository.OrderItemRepository;
 import br.com.food.repository.ProductRepository;
+import br.com.food.utils.CustomClientOrderSerializer;
 
 public class OrderController {
-
-	@Autowired
+	
 	private ClientOrderRepository CliOrderRepository;
 
-	@Autowired
 	private CustomerRepository customerRepository;
 
-	@Autowired
 	private ProductRepository productRepository;
 
-	@Autowired
 	private OrderItemRepository orderItemRepository;
+
+	public OrderController(ClientOrderRepository cliOrderRepository, CustomerRepository customerRepository,
+			ProductRepository productRepository, OrderItemRepository orderItemRepository) {
+		this.CliOrderRepository = cliOrderRepository;
+		this.customerRepository = customerRepository;
+		this.productRepository = productRepository;
+		this.orderItemRepository = orderItemRepository;
+	}
+
+
 
 	@PostMapping("/Order/add")
 	@ResponseBody
